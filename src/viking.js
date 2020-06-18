@@ -26,14 +26,14 @@ class Viking extends Soldier {
             return `${this.name} has died in act of combat`
         }
     }
-    battleCry (){
+    battleCry() {
         return `Odin Owns You All!`
     }
 }
 
 // Saxon
 class Saxon extends Soldier {
-    receiveDamage (theDamage) {
+    receiveDamage(theDamage) {
         super.receiveDamage(theDamage);
         if (this.health > 0) {
             return `A Saxon has received ${theDamage} points of damage`
@@ -44,4 +44,26 @@ class Saxon extends Soldier {
 }
 
 // War
-class War {}
+class War {
+    vikingArmy = []
+    saxonArmy = []
+    addViking(vikingObject) {
+        this.vikingArmy.push(vikingObject);
+
+    }
+    addSaxon(saxonObject) {
+        this.saxonArmy.push(saxonObject);
+    }
+    vikingAttack() {
+        // should return result of calling receiveDamage() of a Saxon with the strength of a Viking
+        let saxRandom = Math.floor(Math.random() * saxonArmy.length);
+        let vikRandom = Math.floor(Math.random() * vikingArmy.length);
+        return this.saxonArmy[saxRandom].receiveDamage(this.saxonArmy[vikRandom].strength);
+    }
+    saxonAttack() {
+
+    }
+    showStatus() {
+
+    }
+}
