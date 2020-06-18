@@ -65,20 +65,22 @@ class War {
     this.saxonArmy.push(Saxon);
   }
 
-  choseRandomSoldier(soldierArray){
-    const randomSoldier = Math.floor(Math.random * soldierArray.length);
-    return randomSoldier  
+  chooseRandomSoldier(soldierArray){
+    // let randomNum = Math.floor(Math.random * soldierArray.length);
+    // return soldierArray[randomNum]  
+    return soldierArray[Math.floor(Math.random() * soldierArray.length)];
   }
 
   vikingAttack() {
-    const randomViking = this.choseRandomSoldier(this.vikingArmy.length);
-    const randomSaxon = this.choseRandomSoldier(this.saxonArmy.length);
+    let randomViking = this.chooseRandomSoldier(this.vikingArmy);
+    let randomSaxon = this.chooseRandomSoldier(this.saxonArmy);
 
-    const damage = randomSaxon.receiveDamage(randomViking.strength);
+    let damage = randomSaxon.receiveDamage(randomViking.strength);
 
-    for (saxon of this.saxonArmy){
-        if(saxon.health === 0){
-            this.saxonArmy.splice(this.saxonArmy.indexOf(saxon), 1)
+    for (let i = 0; i < this.saxonArmy.length; i++){
+        let saxon = this.saxonArmy[i]
+        if(saxon.health <= 0){
+            this.saxonArmy.splice(i, 1)
         }
     }
     return damage 
@@ -86,10 +88,18 @@ class War {
 
 
   saxonAttack() {
-    const randomViking = this.choseRandomSoldier(this.vikingArmy.length);
-    const randomSaxon = this.choseRandomSoldier(this.saxonArmy.length);
+    let randomViking = this.chooseRandomSoldier(this.vikingArmy);
+    let randomSaxon = this.chooseRandomSoldier(this.saxonArmy);
 
-    randomViking.receiveDamage(randomSaxon.strength);
+    let damage = randomViking.receiveDamage(randomSaxon.strength);
+    
+    for (let i = 0; i < this.vikingArmy.length; i++){
+        let viking = this.vikingArmy[i]
+        if(viking.health <= 0){
+            this.vikingArmy.splice(i, 1)
+        }
+    }
+    return damage 
 
   }
 
