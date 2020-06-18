@@ -62,7 +62,15 @@ class War {
         this.saxonArmy.push(Saxon);
     }
 
-    // vikingAttack() {}
+    vikingAttack() {
+        var randomSaxon = Math.floor(Math.random()* this.saxonArmy.length);
+        var randomViking= Math.floor(Math.random()*this.vikingArmy.length);
+        this.saxonArmy[randomSaxon].receiveDamage(this.vikingArmy[randomViking].strength);
+    }
+
+    
+
+
     // saxonAttack() {
 
         // Saxon.receiveDamage() === Viking.strength();
