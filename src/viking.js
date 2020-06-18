@@ -65,6 +65,7 @@ class War {
     this.saxonArmy.push(Saxon);
   }
 
+<<<<<<< HEAD
   chooseRandomSoldier(soldierArray){
     // let randomNum = Math.floor(Math.random * soldierArray.length);
     // return soldierArray[randomNum]  
@@ -76,6 +77,18 @@ class War {
     let randomSaxon = this.chooseRandomSoldier(this.saxonArmy);
 
     let damage = randomSaxon.receiveDamage(randomViking.strength);
+=======
+  choseRandomSoldier(army){
+    const randomSoldier = army[Math.floor(Math.random() * army.length)];
+    return randomSoldier  
+  }
+
+  vikingAttack() {
+    let viking = this.choseRandomSoldier(this.vikingArmy);
+    let saxon = this.choseRandomSoldier(this.saxonArmy);
+
+    const damage = saxon.receiveDamage(viking.strength);
+>>>>>>> 319318503cad27e126c4307c11432d93f7c32000
 
     for (let i = 0; i < this.saxonArmy.length; i++){
         let saxon = this.saxonArmy[i]
@@ -83,11 +96,12 @@ class War {
             this.saxonArmy.splice(i, 1)
         }
     }
-    return damage 
+    return damage;
   }
 
 
   saxonAttack() {
+<<<<<<< HEAD
     let randomViking = this.chooseRandomSoldier(this.vikingArmy);
     let randomSaxon = this.chooseRandomSoldier(this.saxonArmy);
 
@@ -100,11 +114,29 @@ class War {
         }
     }
     return damage 
+=======
+    let viking = this.choseRandomSoldier(this.vikingArmy);
+    let saxon = this.choseRandomSoldier(this.saxonArmy);
 
+    const damage = viking.receiveDamage(saxon.strength);
+>>>>>>> 319318503cad27e126c4307c11432d93f7c32000
+
+    for (viking of this.vikingArmy){
+        if(viking.health === 0){
+            this.vikingArmy.splice(this.vikingArmy.indexOf(viking), 1)
+        }
+    }
+    return damage;
   }
 
   showStatus() {
-
+    if (this.saxonArmy.length === 0) {
+      return 'Vikings have won the war of the century!';
+    } else if (this.vikingArmy.length === 0) {
+      return 'Saxons have fought for their lives and survived another day...';
+    } else if (this.vikingArmy.length === 1 && this.saxonArmy.length === 1) {
+      return 'Vikings and Saxons are still in the thick of battle.';
+    }
   }
 
 }
