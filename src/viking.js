@@ -64,22 +64,30 @@ class War {
 
     vikingAttack() {
         var randomSaxon = Math.floor(Math.random()* this.saxonArmy.length);
-        var randomViking= Math.floor(Math.random()*this.vikingArmy.length);
-        this.saxonArmy[randomSaxon].receiveDamage(this.vikingArmy[randomViking].strength);
+        var randomViking = Math.floor(Math.random()*this.vikingArmy.length);
+        let attackResult = this.saxonArmy[randomSaxon].receiveDamage(this.vikingArmy[randomViking].strength);
+        
+        // Keep alive Saxons only
+        this.saxonArmy = this.saxonArmy.filter(function (aliveSaxons) {
+            return aliveSaxons.health > 0;
+        });
+
+        return attackResult;
     }
 
+    saxonAttack() {
+        var randomSaxon = Math.floor(Math.random()* this.saxonArmy.length);
+        var randomViking = Math.floor(Math.random()*this.vikingArmy.length);
+        let attackResult = this.vikingArmy[randomViking].receiveDamage(this.saxonArmy[randomSaxon].strength);
+        
+        // Keep alive Saxons only
+        this.vikingArmy = this.vikingArmy.filter(function (aliveVikings) {
+            return aliveVikings.health > 0;
+        });
+
+        return attackResult;
+    }
     
-
-
-    // saxonAttack() {
-
-        // Saxon.receiveDamage() === Viking.strength();
-        // if (Saxon.health <= 0) {
-
-        // } else {
-            
-        // }
-    //}
     // showStatus() {}
 }
 
