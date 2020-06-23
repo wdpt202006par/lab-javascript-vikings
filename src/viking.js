@@ -80,7 +80,36 @@ class War {
     }
     return damage
   }
+  //Super Bonus
+  attack(army){
+    let vikingIndex= Math.floor(Math.random()*this.vikingArmy.length);
+    let saxonIndex = Math.floor(Math.random()*this.saxonArmy.length);
+    let viking = this.vikingArmy[vikingIndex];
+    let saxon = this.saxonArmy[saxonIndex];
+    let damage;
+    switch (army){
+      case this.vikingArmy:
+        damage= saxon.receiveDamage(viking.strength);
+        if (saxon.health<= 0){
+          this.saxonArmy.splice(saxonIndex,1)
+        }
+        break
+      case this.saxonArmy:
+        damage= viking.receiveDamage(saxon.strength) ;
+        if (viking.health<= 0){
+          this.vikingArmy.splice(vikingIndex,1)
+        }
+        break
+    }
+    return damage
+  }
   showStatus(){
-
+    if(this.saxonArmy.length <= 0){
+      return "Vikings have won the war of the century!"
+    }else if(this.vikingArmy.length <= 0){
+      return "Saxons have fought for their lives and survived another day..."
+    }else {
+      return "Vikings and Saxons are still in the thick of battle."
+    }
   }
 }
